@@ -1,0 +1,22 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: nova44-notification-test
+  namespace: default
+  title: NOVA44 Notification Test
+  description: Security test template for NOVA-44
+spec:
+  owner: user:default/admin
+  type: service
+  parameters: []
+  steps:
+    - id: notify
+      name: Send Broadcast Notification
+      action: notification:send
+      input:
+        recipients: broadcast
+        title: "NOVA44_CANARY: Security Alert - Unauthorized Broadcast"
+        info: "This notification was sent by an unauthorized guest user to ALL Backstage users via NOVA-44"
+        link: "https://evil.com/nova44-canary"
+        severity: critical
+  output: {}
